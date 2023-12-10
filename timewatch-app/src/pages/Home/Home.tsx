@@ -17,7 +17,7 @@ const Home: React.FC = () => {
           style={{ fontSize: `${window.innerWidth / 200}rem` }}
           className="home_title"
         >
-          ברוכים הבאים לאפליקציית Timewatch אטומטי!
+          ברוכים הבאים לאפליקציית Timewatch אוטומטי!
         </h1>
         <p
           style={{ fontSize: `${window.innerWidth / 300}rem` }}
