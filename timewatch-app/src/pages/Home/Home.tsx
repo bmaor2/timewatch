@@ -1,12 +1,24 @@
 import React, { useMemo } from "react";
 import { Avatar, Button, CardContent } from "@mui/material";
+import { motion } from "framer-motion";
 
 import "./home.scss";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const pageWidth = useMemo(() => window.innerWidth, [window.innerWidth]);
+  const navigate = useNavigate();
+
+  function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+    navigate("/new-clock");
+  }
   return (
-    <div className="home_container">
+    <motion.div
+      className="home_container"
+      transition={{ ease: "easeOut", duration: 1 }}
+      animate={{ opacity: [0, 1] }}
+    >
       <Avatar
         src="/images/icon.jpeg"
         alt="main icon"
@@ -32,10 +44,11 @@ const Home: React.FC = () => {
         sx={{ fontSize: `${pageWidth / 400}rem` }}
         variant="contained"
         className="home_button"
+        onClick={handleClick}
       >
         להגדרת שעון אוטומטי
       </Button>
-    </div>
+    </motion.div>
   );
 };
 

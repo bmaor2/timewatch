@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">timewatch</string>
+    <string name="title_activity_main">timewatch</string>
+    <string name="package_name">app.timewatch.auto</string>
+    <string name="custom_url_scheme">app.timewatch.auto</string>
+</resources>

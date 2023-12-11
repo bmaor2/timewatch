@@ -1,0 +1,30 @@
+{
+  "appId": "app.timewatch.auto",
+  "appName": "timewatch",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    },
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    },
+    "Keyboard": {
+      "resize": "none",
+      "style": "DEFAULT"
+    },
+    "CapacitorCookies": {
+      "enabled": true
+    }
+  },
+  "cordova": {},
+  "server": {
+    "androidScheme": "https"
+  }
+}
