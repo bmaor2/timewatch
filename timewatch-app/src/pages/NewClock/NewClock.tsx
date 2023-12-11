@@ -1,9 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
+import { Geolocation } from "@capacitor/geolocation";
+import { useAsyncEffect } from "@hilma/tools";
 
 type FormValues = {
-  location: string;
+  location: { latitude?: number; longitude?: number; description?: string };
   entranceTime: Date;
   exitTime: Date;
   maxEntranceTime: Date;
@@ -11,10 +13,10 @@ type FormValues = {
 };
 
 const NewClock: React.FC = () => {
-  const { handleChange, handleSubmit, values, errors } =
+  const { handleChange, handleSubmit, values, setFieldValue, errors } =
     useFormik<FormValues>({
       initialValues: {
-        location: "",
+        location: { latitude: 0, longitude: 0, description: "" },
         exitTime: new Date(),
         maxEntranceTime: new Date(),
         entranceTime: new Date(),
@@ -22,6 +24,24 @@ const NewClock: React.FC = () => {
       },
       onSubmit: () => {},
     });
+
+  useAsyncEffect(async () => {
+    await Geolocation.requestPermissions();
+    const permissionStatus = await Geolocation.checkPermissions();
+    console.log('permissionStatus: ', permissionStatus);
+    getCurrentPosition();
+  }, []);
+
+  async function getCurrentPosition() {
+    const { latitude, longitude } = (await Geolocation.getCurrentPosition())
+      .coords;
+    setFieldValue(
+      "location",
+      { latitude, longitude, description: "מיקומך הנוכחי" },
+      true
+    );
+  }
+
   return (
     <motion.div
       transition={{ ease: "easeOut", duration: 1 }}
@@ -34,9 +54,9 @@ const NewClock: React.FC = () => {
           name="location"
           type="text"
           onChange={handleChange}
-          value={values.location}
+          value={values.location.description}
         />
-        {errors.location ? <div>{errors.location}</div> : null}
+        {errors.location ? <div>{values.location.description}</div> : null}
         <button type="submit">Submit</button>
       </form>
     </motion.div>
