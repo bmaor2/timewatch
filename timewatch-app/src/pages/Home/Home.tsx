@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 import { Avatar, Button, CardContent } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import "./home.scss";
-import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const pageWidth = useMemo(() => window.innerWidth, [window.innerWidth]);

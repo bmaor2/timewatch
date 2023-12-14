@@ -53,7 +53,7 @@ const NewClock: React.FC = () => {
       animate={{ opacity: [0, 1] }}
     >
       <form onSubmit={handleSubmit}>
-        <label htmlFor="location">First Name</label>
+        <label htmlFor="location">מיקום הפעלת השעון</label>
         <input
           id="location"
           name="location"
