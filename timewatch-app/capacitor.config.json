@@ -1,6 +1,6 @@
 {
   "appId": "app.timewatch.auto",
-  "appName": "timewatch",
+  "appName": "timewatchAuto",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "dist",
