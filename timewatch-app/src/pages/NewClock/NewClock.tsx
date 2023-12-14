@@ -25,10 +25,15 @@ const NewClock: React.FC = () => {
       onSubmit: () => {},
     });
 
-  useAsyncEffect(async () => {
-    await Geolocation.requestPermissions();
-    const permissionStatus = await Geolocation.checkPermissions();
-    console.log('permissionStatus: ', permissionStatus);
+  useAsyncEffect(async (isMounted) => {
+    const { coarseLocation, location } = await Geolocation.checkPermissions();
+    if (
+      (isMounted.current && coarseLocation !== "granted") ||
+      location !== "granted"
+    )
+      await Geolocation.requestPermissions({
+        permissions: ["coarseLocation", "location"],
+      });
     getCurrentPosition();
   }, []);
 
@@ -58,6 +63,7 @@ const NewClock: React.FC = () => {
         />
         {errors.location ? <div>{values.location.description}</div> : null}
         <button type="submit">Submit</button>
+        {JSON.stringify(values.location, null, 2)}
       </form>
     </motion.div>
   );
